@@ -1,0 +1,21 @@
+dataset_name: default
+dataset_path: TheFinAI/Regulation_Link_Retrieval_test
+output_type: generate_until
+doc_to_target: '{{answer}}'
+doc_to_text: '{{query}}'
+fewshot_split: train
+should_decontaminate: true
+doc_to_decontamination_query: "{{query}}"
+generation_kwargs:
+  do_sample: false
+  temperature: 0.0
+  max_gen_toks: 512
+metric_list:
+  - metric: !function reg_utils.exact_match
+    aggregation: !function reg_utils.exact_match_agg
+    higher_is_better: true
+metadata:
+  version: '1.0'
+task: regLink
+tag: regulation_Link
+test_split: test
